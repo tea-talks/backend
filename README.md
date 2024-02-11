@@ -1,4 +1,4 @@
 # TEA TALKS DOCS
 
-## [For developers](./docs/developers/index.md)
-## [For users](./docs/users/index.md)
+## [For Developers](./docs/developers/index.md)
+## [For Users](./docs/users/index.md)

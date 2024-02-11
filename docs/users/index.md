@@ -10,13 +10,12 @@
 - [Перегляд подій на карті](./functions/map_view.md)
 - [Перегляд подій списком](./functions/list_view.md)
 - [Підписка на події](./functions/subscription.md)
-- [Створення нагадування про подію](./functions/remind.md)
+- [Приєднання до події](./functions/application.md)
 - [Створення фільтрів](./functions/create_filter.md)
-- [Застосування фільтрів](./functions/apply_filter.md)
+- [Застосування фільтрів](./functions/apply_filter.md) ??
 - [Створення події](./functions/create.md)
-- [Запрошення на подію](./functions/invite.md)
+- [Запрошення на подію](./functions/invite.md) ??
 - [Чат події (список учасників)](./functions/chat.md)
 - [Оцінювання місця, ініціатора та теми події](./functions/rate.md)
 - [Перегляд статистики (рейтигів) місць, ініціаторів та тем подій](./functions/statistic.md)
 - [Картка місця](./functions/place.md)
-  
