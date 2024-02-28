@@ -1,70 +1,43 @@
 'use strict';
 
 const { Readable } = require('node:stream');
-const { MyWritable } = require('./writable');
-
-const {
-  setTimeout: wait,
-  setInterval: interval,
-} = require('node:timers/promises');
 
 class MyReadable extends Readable {
   constructor() {
     super({
       objectMode: true,
+      highWaterMark: 3,
     });
     this._data = [];
-    this.onResume = this.onResume.bind(this);
+    this.readData = this.readData.bind(this);
     this.on('resume', () => console.log('resume'));
+    this.on('end', () => console.log('end'));
+    this.on('close', () => console.log('close'));
   }
 
   set data(data) {
     this._data.push(...data);
     this.emit('continue');
-    console.log('RESUME');
-    this.resume();
   }
 
   get data() {
     return this._data;
   }
 
-  onResume() {
-    this.readData();
-  }
-
   readData() {
-    const i = this.data.shift();
-    if (i !== undefined) this.push(i);
-    else {
-      this.pause();
-      this.once('resume', this.onResume);
+    if (this.data.length) {
+      const item = this.data.shift();
+      this.push(item);
     }
-    // else this.once('continue', this.onResume);
+    else this.once('continue', this.readData);
   }
 
   async _read() {
-    await wait(200);
+    // await wait(200);
     this.readData();
   }
 }
 
-const readable = new MyReadable();
-const writable = new MyWritable();
-
-const read = async () => {
-  for await (const i of readable) {
-    console.log(i);
-  }
+module.exports = {
+  MyReadable,
 };
-
-const push = async () => {
-  let i = 0;
-  for await (const _ of interval(5000)) {
-    readable.data = [i++, i++, i++];
-  }
-};
-
-// read();
-readable.pipe(writable, { end: false });
-push();
